@@ -7,5 +7,5 @@ export const makeSelectHistoryPositionForUri = uri =>
   createSelector(
     selectState,
     makeSelectClaimForUri(uri),
-    (state, claim) => state.positions[claim.claim_id] || null
+    (state, claim) => (state[claim.claim_id] ? state[claim.claim_id].position : null)
   );

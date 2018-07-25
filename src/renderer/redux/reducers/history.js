@@ -19,9 +19,9 @@ export default handleActions(
       const { claimId, position } = action.data;
       return {
         ...state,
-        positions: {
-          ...state.positions,
-          [claimId]: position,
+        [claimId]: {
+          ...state[claimId],
+          position,
         },
       };
     },
