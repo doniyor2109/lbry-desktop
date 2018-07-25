@@ -78,7 +78,7 @@ class VideoPlayer extends React.PureComponent {
     if (mediaElement) {
       mediaElement.currentTime = position || 0;
       mediaElement.addEventListener('timeupdate', () =>
-        this.props.savePosition(claim.claim_id, mediaElement.currentTime)
+        this.props.saveHistoryPosition(claim.claim_id, mediaElement.currentTime)
       );
       mediaElement.addEventListener('click', this.togglePlayListener);
       mediaElement.addEventListener('loadedmetadata', loadedMetadata.bind(this), {

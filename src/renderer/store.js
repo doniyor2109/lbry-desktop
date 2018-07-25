@@ -17,7 +17,7 @@ import settingsReducer from 'redux/reducers/settings';
 import userReducer from 'redux/reducers/user';
 import shapeShiftReducer from 'redux/reducers/shape_shift';
 import subscriptionsReducer from 'redux/reducers/subscriptions';
-import mediaReducer from 'redux/reducers/media';
+import historyReducer from 'redux/reducers/history';
 import publishReducer from 'redux/reducers/publish';
 import { persistStore, autoRehydrate } from 'redux-persist';
 import createCompressor from 'redux-persist-transform-compress';
@@ -69,7 +69,7 @@ const reducers = combineReducers({
   user: userReducer,
   shapeShift: shapeShiftReducer,
   subscriptions: subscriptionsReducer,
-  media: mediaReducer,
+  history: historyReducer,
   publish: publishReducer,
   notifications: notificationsReducer,
   blacklist: blacklistReducer,

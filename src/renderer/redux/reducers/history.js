@@ -2,7 +2,7 @@
 import * as actions from 'constants/action_types';
 import { handleActions } from 'util/redux-utils';
 
-export type MediaState = {
+export type HistoryState = {
   positions: {
     [string]: number,
   },
@@ -15,7 +15,7 @@ const defaultState = { positions: {} };
 
 export default handleActions(
   {
-    [actions.MEDIA_POSITION]: (state: MediaState, action: Action) => {
+    [actions.HISTORY_SET_POSITION]: (state: HistoryState, action: Action) => {
       const { outpoint, position } = action.data;
       return {
         ...state,
