@@ -3,7 +3,7 @@ import * as settings from 'constants/settings';
 import { doChangeVolume } from 'redux/actions/app';
 import { selectVolume } from 'redux/selectors/app';
 import { doPlayUri, doSetPlayingUri } from 'redux/actions/content';
-import { doPlay, doPause, savePosition } from 'redux/actions/media';
+import { savePosition } from 'redux/actions/media';
 import {
   makeSelectMetadataForUri,
   makeSelectContentTypeForUri,
@@ -15,7 +15,7 @@ import {
   selectSearchBarFocused,
 } from 'lbry-redux';
 import { makeSelectClientSetting, selectShowNsfw } from 'redux/selectors/settings';
-import { selectMediaPaused, makeSelectMediaPositionForUri } from 'redux/selectors/media';
+import { makeSelectMediaPositionForUri } from 'redux/selectors/media';
 import { selectPlayingUri } from 'redux/selectors/content';
 import { selectFileInfoErrors } from 'redux/selectors/file_info';
 import FileViewer from './view';
@@ -31,19 +31,16 @@ const select = (state, props) => ({
   playingUri: selectPlayingUri(state),
   contentType: makeSelectContentTypeForUri(props.uri)(state),
   volume: selectVolume(state),
-  mediaPaused: selectMediaPaused(state),
   mediaPosition: makeSelectMediaPositionForUri(props.uri)(state),
   autoplay: makeSelectClientSetting(settings.AUTOPLAY)(state),
   searchBarFocused: selectSearchBarFocused(state),
-  fileInfoErrors: selectFileInfoErrors(state)
+  fileInfoErrors: selectFileInfoErrors(state),
 });
 
 const perform = dispatch => ({
   play: uri => dispatch(doPlayUri(uri)),
   cancelPlay: () => dispatch(doSetPlayingUri(null)),
   changeVolume: volume => dispatch(doChangeVolume(volume)),
-  doPlay: () => dispatch(doPlay()),
-  doPause: () => dispatch(doPause()),
   savePosition: (claimId, position) => dispatch(savePosition(claimId, position)),
 });
 
