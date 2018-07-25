@@ -16,12 +16,12 @@ const defaultState = { positions: {} };
 export default handleActions(
   {
     [actions.HISTORY_SET_POSITION]: (state: HistoryState, action: Action) => {
-      const { outpoint, position } = action.data;
+      const { claimId, position } = action.data;
       return {
         ...state,
         positions: {
           ...state.positions,
-          [outpoint]: position,
+          [claimId]: position,
         },
       };
     },
