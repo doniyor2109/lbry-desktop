@@ -17,5 +17,16 @@ export const makeSelectHistoryLastViewedForUri = uri =>
   createSelector(makeSelectHistoryForUri(uri), history => history.lastViewed || null);
 
 export const selectHistoryLastViewedAll = createSelector(selectState, history =>
-  Object.keys(history).map(key => ({ [key]: history[key].lastViewed }))
+  Object.keys(history).reduce(
+    (acc, key) => [
+      ...acc,
+      {
+        id: key,
+        lastViewed: history[key].lastViewed,
+      },
+    ],
+    []
+  )
 );
+
+// Object.keys(history).map(key => ({ [key]: history[key].lastViewed }))
