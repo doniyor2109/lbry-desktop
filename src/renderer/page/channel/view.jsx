@@ -22,14 +22,17 @@ type Props = {
   fetchClaims: (string, number) => void,
   fetchClaimCount: string => void,
   navigate: (string, {}) => void,
+  setLastViewed: string => void,
 };
 
 class ChannelPage extends React.PureComponent<Props> {
   componentDidMount() {
-    const { uri, page, fetchClaims, fetchClaimCount } = this.props;
+    const { uri, page, fetchClaims, fetchClaimCount, claim, setLastViewed } = this.props;
 
     fetchClaims(uri, page || 1);
     fetchClaimCount(uri);
+
+    setLastViewed(claim.claim_id);
   }
 
   componentWillReceiveProps(nextProps: Props) {

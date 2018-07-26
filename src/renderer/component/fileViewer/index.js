@@ -3,7 +3,7 @@ import * as settings from 'constants/settings';
 import { doChangeVolume } from 'redux/actions/app';
 import { selectVolume } from 'redux/selectors/app';
 import { doPlayUri, doSetPlayingUri } from 'redux/actions/content';
-import { saveHistoryPosition } from 'redux/actions/history';
+import { doSetHistoryPosition } from 'redux/actions/history';
 import {
   makeSelectMetadataForUri,
   makeSelectContentTypeForUri,
@@ -41,7 +41,7 @@ const perform = dispatch => ({
   play: uri => dispatch(doPlayUri(uri)),
   cancelPlay: () => dispatch(doSetPlayingUri(null)),
   changeVolume: volume => dispatch(doChangeVolume(volume)),
-  saveHistoryPosition: (claimId, position) => dispatch(saveHistoryPosition(claimId, position)),
+  doSetHistoryPosition: (claimId, position) => dispatch(doSetHistoryPosition(claimId, position)),
 });
 
 export default connect(

@@ -4,6 +4,7 @@ import { doNavigate } from 'redux/actions/navigation';
 import { selectRewardContentClaimIds, selectPlayingUri } from 'redux/selectors/content';
 import { doCheckSubscription } from 'redux/actions/subscriptions';
 import { doSetClientSetting } from 'redux/actions/settings';
+import { doSetHistoryLastViewed } from 'redux/actions/history';
 import {
   doFetchFileInfo,
   doFetchCostInfoForUri,
@@ -42,6 +43,7 @@ const perform = dispatch => ({
   openModal: (modal, props) => dispatch(doNotify(modal, props)),
   prepareEdit: (publishData, uri) => dispatch(doPrepareEdit(publishData, uri)),
   setClientSetting: (key, value) => dispatch(doSetClientSetting(key, value)),
+  setLastViewed: claimId => dispatch(doSetHistoryLastViewed(claimId)),
 });
 
 export default connect(

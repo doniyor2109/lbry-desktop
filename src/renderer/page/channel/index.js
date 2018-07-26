@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
 import { doFetchClaimsByChannel, doFetchClaimCountByChannel } from 'redux/actions/content';
+import { doSetHistoryLastViewed } from 'redux/actions/history';
 import {
   makeSelectClaimForUri,
   makeSelectClaimsInChannelForCurrentPage,
@@ -26,6 +27,7 @@ const perform = dispatch => ({
   fetchClaims: (uri, page) => dispatch(doFetchClaimsByChannel(uri, page)),
   fetchClaimCount: uri => dispatch(doFetchClaimCountByChannel(uri)),
   navigate: (path, params) => dispatch(doNavigate(path, params)),
+  setLastViewed: claimId => dispatch(doSetHistoryLastViewed(claimId)),
 });
 
 export default connect(

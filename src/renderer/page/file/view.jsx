@@ -47,6 +47,7 @@ type Props = {
   setClientSetting: (string, boolean | string) => void,
   checkSubscription: ({ channelName: string, uri: string }) => void,
   subscriptions: Array<Subscription>,
+  setLastViewed: string => void,
 };
 
 class FilePage extends React.Component<Props> {
@@ -69,7 +70,7 @@ class FilePage extends React.Component<Props> {
   }
 
   componentDidMount() {
-    const { uri, fileInfo, fetchFileInfo, fetchCostInfo } = this.props;
+    const { uri, fileInfo, fetchFileInfo, fetchCostInfo, claim, setLastViewed } = this.props;
 
     if (fileInfo === undefined) {
       fetchFileInfo(uri);
@@ -79,6 +80,8 @@ class FilePage extends React.Component<Props> {
     fetchCostInfo(uri);
 
     this.checkSubscription(this.props);
+
+    setLastViewed(claim.claim_id);
   }
 
   componentWillReceiveProps(nextProps: Props) {

@@ -33,7 +33,7 @@ type Props = {
   volume: number,
   claim: Claim,
   uri: string,
-  saveHistoryPosition: (string, number) => void,
+  doSetHistoryPosition: (string, number) => void,
   historyPosition: ?number,
   className: ?string,
   obscureNsfw: boolean,
@@ -119,7 +119,7 @@ class FileViewer extends React.PureComponent<Props> {
       volume,
       claim,
       uri,
-      saveHistoryPosition,
+      doSetHistoryPosition,
       historyPosition,
       className,
       obscureNsfw,
@@ -165,7 +165,7 @@ class FileViewer extends React.PureComponent<Props> {
                 downloadCompleted={fileInfo.completed}
                 changeVolume={changeVolume}
                 volume={volume}
-                saveHistoryPosition={saveHistoryPosition}
+                doSetHistoryPosition={doSetHistoryPosition}
                 claim={claim}
                 uri={uri}
                 position={historyPosition}
