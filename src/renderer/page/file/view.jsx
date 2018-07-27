@@ -70,7 +70,7 @@ class FilePage extends React.Component<Props> {
   }
 
   componentDidMount() {
-    const { uri, fileInfo, fetchFileInfo, fetchCostInfo, claim, setLastViewed } = this.props;
+    const { uri, fileInfo, fetchFileInfo, fetchCostInfo, setLastViewed } = this.props;
 
     if (fileInfo === undefined) {
       fetchFileInfo(uri);
@@ -81,7 +81,7 @@ class FilePage extends React.Component<Props> {
 
     this.checkSubscription(this.props);
 
-    setLastViewed(claim.claim_id);
+    setLastViewed(uri);
   }
 
   componentWillReceiveProps(nextProps: Props) {

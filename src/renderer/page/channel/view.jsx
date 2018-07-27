@@ -27,12 +27,12 @@ type Props = {
 
 class ChannelPage extends React.PureComponent<Props> {
   componentDidMount() {
-    const { uri, page, fetchClaims, fetchClaimCount, claim, setLastViewed } = this.props;
+    const { uri, page, fetchClaims, fetchClaimCount, setLastViewed } = this.props;
 
     fetchClaims(uri, page || 1);
     fetchClaimCount(uri);
 
-    setLastViewed(claim.claim_id);
+    setLastViewed(uri);
   }
 
   componentWillReceiveProps(nextProps: Props) {

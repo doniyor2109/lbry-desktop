@@ -36,7 +36,7 @@ class VideoPlayer extends React.PureComponent {
 
   componentDidMount() {
     const container = this.media;
-    const { downloadCompleted, contentType, changeVolume, volume, position, claim } = this.props;
+    const { downloadCompleted, contentType, changeVolume, volume, position, uri } = this.props;
 
     const loadedMetadata = () => {
       this.setState({ hasMetadata: true, startedPlaying: true });
@@ -78,7 +78,7 @@ class VideoPlayer extends React.PureComponent {
     if (mediaElement) {
       mediaElement.currentTime = position || 0;
       mediaElement.addEventListener('timeupdate', () =>
-        this.props.doSetHistoryPosition(claim.claim_id, mediaElement.currentTime)
+        this.props.doSetHistoryPosition(uri, mediaElement.currentTime)
       );
       mediaElement.addEventListener('click', this.togglePlayListener);
       mediaElement.addEventListener('loadedmetadata', loadedMetadata.bind(this), {
