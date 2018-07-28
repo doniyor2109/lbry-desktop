@@ -2,29 +2,31 @@
 import * as actions from 'constants/action_types';
 import type { Dispatch } from 'redux/reducers/history';
 
-export const doSetHistoryPosition = (claimId: String, position: Number) => (dispatch: Dispatch) =>
+export const doSetHistoryPosition = (uri: String, position: Number) => (dispatch: Dispatch) =>
   dispatch({
     type: actions.SET_HISTORY_POSITION,
     data: {
-      claimId,
+      uri,
       position,
     },
   });
 
-export const doSetHistoryLastViewed = (claimId: String) => (dispatch: Dispatch) =>
+export const doSetHistoryLastViewed = (uri: String) => (dispatch: Dispatch) =>
   dispatch({
     type: actions.SET_HISTORY_LAST_VIEWED,
     data: {
-      claimId,
+      uri,
       lastViewed: Date.now(),
     },
   });
 
-export const doClearHistoryClaim = (claimId: String) => (dispatch: Dispatch) =>
+export const doClearHistoryClaim = (uri: String) => (dispatch: Dispatch) => {
+  console.log('doClearHistoryClaim uri:', uri);
   dispatch({
     type: actions.CLEAR_HISTORY_CLAIM,
-    data: { claimId },
+    data: { uri },
   });
+};
 
 export const doClearHistoryAll = () => (dispatch: Dispatch) =>
   dispatch({

@@ -17,31 +17,20 @@ const defaultState = {};
 export default handleActions(
   {
     [actions.SET_HISTORY_POSITION]: (state: HistoryState, action: Action) => {
-      const { claimId, position } = action.data;
-      return {
-        ...state,
-        [claimId]: {
-          ...state[claimId],
-          position,
-        },
-      };
+      const { uri, position } = action.data;
+      return { ...state, [uri]: { ...state[uri], position } };
     },
 
     [actions.SET_HISTORY_LAST_VIEWED]: (state: HistoryState, action: Action) => {
-      const { claimId, lastViewed } = action.data;
-      return {
-        ...state,
-        [claimId]: {
-          ...state[claimId],
-          lastViewed,
-        },
-      };
+      const { uri, lastViewed } = action.data;
+      return { ...state, [uri]: { ...state[uri], lastViewed } };
     },
 
-    [actions.CLEAR_HISTORY_CLAIM]: (state: HistoryState, action: Action) => ({
-      ...state,
-      [action.data.claimId]: undefined,
-    }),
+    [actions.CLEAR_HISTORY_CLAIM]: (state: HistoryState, action: Action) => {
+      const newState = state;
+      delete newState[action.data.uri];
+      return { ...newState };
+    },
 
     [actions.CLEAR_HISTORY_ALL]: () => ({}),
   },

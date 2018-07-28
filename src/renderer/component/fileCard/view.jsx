@@ -3,6 +3,7 @@ import * as React from 'react';
 import { normalizeURI, convertToShareLink } from 'lbry-redux';
 import type { Claim, Metadata } from 'types/claim';
 import CardMedia from 'component/cardMedia';
+import Button from 'component/button';
 import TruncatedText from 'component/common/truncated-text';
 import Icon from 'component/common/icon';
 import FilePrice from 'component/filePrice';
@@ -10,6 +11,7 @@ import UriIndicator from 'component/uriIndicator';
 import * as icons from 'constants/icons';
 import classnames from 'classnames';
 import { openCopyLinkMenu } from '../../util/contextMenu';
+import moment from 'moment';
 
 // TODO: iron these out
 type Props = {
@@ -23,6 +25,10 @@ type Props = {
   claimIsMine: boolean,
   showPrice: boolean,
   pending?: boolean,
+  history?: {
+    lastViewed: number,
+    uri: string,
+  },
   /* eslint-disable react/no-unused-prop-types */
   resolveUri: string => void,
   isResolvingUri: boolean,
@@ -61,6 +67,8 @@ class FileCard extends React.PureComponent<Props> {
       claimIsMine,
       showPrice,
       pending,
+      history,
+      clearHistory,
     } = this.props;
 
     const shouldHide = !claimIsMine && !pending && obscureNsfw && metadata && metadata.nsfw;
@@ -97,19 +105,35 @@ class FileCard extends React.PureComponent<Props> {
           <div className="card__title--small">
             <TruncatedText lines={3}>{title}</TruncatedText>
           </div>
-          <div className="card__subtitle">
-            {pending ? (
-              <div>Pending...</div>
-            ) : (
-              <React.Fragment>
-                <UriIndicator uri={uri} link />
-                <div>
-                  {isRewardContent && <Icon iconColor="red" icon={icons.FEATURED} />}
-                  {fileInfo && <Icon icon={icons.LOCAL} />}
-                </div>
-              </React.Fragment>
-            )}
-          </div>
+          {history ? (
+            <div className="card__subtitle">
+              {moment(history.lastViewed).from(moment())}
+              <div>
+                <Button
+                  button="link"
+                  label="clear"
+                  onClick={event => {
+                    event.stopPropagation();
+                    clearHistory(uri);
+                  }}
+                />
+              </div>
+            </div>
+          ) : (
+            <div className="card__subtitle">
+              {pending ? (
+                <div>Pending...</div>
+              ) : (
+                <React.Fragment>
+                  <UriIndicator uri={uri} link />
+                  <div>
+                    {isRewardContent && <Icon iconColor="red" icon={icons.FEATURED} />}
+                    {fileInfo && <Icon icon={icons.LOCAL} />}
+                  </div>
+                </React.Fragment>
+              )}
+            </div>
+          )}
         </div>
       </section>
     );

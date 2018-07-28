@@ -8,6 +8,7 @@ import {
   makeSelectClaimIsMine,
 } from 'lbry-redux';
 import { doNavigate } from 'redux/actions/navigation';
+import { doClearHistoryClaim } from 'redux/actions/history';
 import { selectRewardContentClaimIds } from 'redux/selectors/content';
 import { selectShowNsfw } from 'redux/selectors/settings';
 import { selectPendingPublish } from 'redux/selectors/publish';
@@ -38,6 +39,7 @@ const select = (state, props) => {
 const perform = dispatch => ({
   navigate: (path, params) => dispatch(doNavigate(path, params)),
   resolveUri: uri => dispatch(doResolveUri(uri)),
+  clearHistory: uri => dispatch(doClearHistoryClaim(uri)),
 });
 
 export default connect(
